@@ -32,6 +32,7 @@ pipeline {
                             reuseNode true
                         }
                     }
+
                     steps{
                         sh '''
                             #test -f build/index.html
@@ -47,6 +48,7 @@ pipeline {
                             reuseNode true
                         }
                     }
+                    
                     steps{
                         sh '''
                             npm install serve
