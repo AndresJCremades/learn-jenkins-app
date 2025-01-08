@@ -2,6 +2,13 @@ pipeline {
     agent any
 
     stages {
+        stage('Test') {
+           
+        }
+
+        stage('E2E') {
+           
+        }
     }
 
     post {
