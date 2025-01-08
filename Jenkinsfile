@@ -40,7 +40,7 @@ pipeline {
 
     post {
         always {
-            junit 'test-results/junit.xml'
+            junit '/workspaces/learn-jenkins-app/test-results/junit.xml'
         }
     }
 }
