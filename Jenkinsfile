@@ -64,7 +64,7 @@ pipeline {
 
     post {
         always {
-            sh 'ls -R'
+            sh 'pwd'
             junit 'test-results/junit.xml'
         }
     }
