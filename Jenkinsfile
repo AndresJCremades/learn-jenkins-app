@@ -37,7 +37,7 @@ pipeline {
                         sh '''
                             test -f build/index.html
                             npm test --reporters=jest-junit'
-                            sh ls -R
+                            ls -R
                         '''
                     }
                 }
@@ -56,7 +56,7 @@ pipeline {
                             node_modules/.bin/serve -s build &
                             sleep 10
                             npx playwright test --reporter=html
-                            sh ls -R
+                            ls -R
                         '''
                     }
                 }
