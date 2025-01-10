@@ -36,7 +36,8 @@ pipeline {
                     steps {
                         sh '''
                             test -f build/index.html
-                            npm test
+                            npm test --reporters=jest-junit'
+                            sh 'ls -R'
                         '''
                     }
                 }
@@ -55,6 +56,7 @@ pipeline {
                             node_modules/.bin/serve -s build &
                             sleep 10
                             npx playwright test --reporter=html
+                            sh 'ls -R'
                         '''
                     }
                 }
@@ -64,7 +66,7 @@ pipeline {
 
     post {
         always {
-            junit 'test-results/**/junit.xml'
+            junit 'test-results/junit.xml'
         }
     }
 }
