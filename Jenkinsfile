@@ -2,8 +2,16 @@ pipeline {
     agent any
 
     stages {
-        /*
-        stage('Build') {
+        stage('w/o docker') {
+            steps {
+                sh '''
+                    echo "Without docker"
+                    ls -la
+                    touch container-no.txt
+                '''
+            }
+        }
+        stage('w/ docker') {
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -12,59 +20,11 @@ pipeline {
             }
             steps {
                 sh '''
+                    echo "With docker"
                     ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm run build
-                    ls -la
+                    touch container-yes.txt
                 '''
             }
-        }
-        */
-
-        stage('Tests') {
-            parallel {
-                stage('Unit tests') {
-                    agent {
-                        docker {
-                            image 'node:18-alpine'
-                            reuseNode true
-                        }
-                    }
-
-                    steps {
-                        sh '''
-                            test -f build/index.html
-                            npm test
-                        '''
-                    }
-                }
-
-                stage('E2E') {
-                    agent {
-                        docker {
-                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
-                            reuseNode true
-                        }
-                    }
-
-                    steps {
-                        sh '''
-                            npm install serve
-                            node_modules/.bin/serve -s build &
-                            sleep 10
-                            npx playwright test --reporter=html
-                        '''
-                    }
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            junit '**/junit.xml'
         }
     }
 }
