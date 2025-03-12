@@ -6,6 +6,7 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
+                    //use same agent for all the steps and share workspace
                     reuseNode true
                 }
             }
