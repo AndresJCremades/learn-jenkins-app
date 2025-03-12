@@ -37,8 +37,11 @@ pipeline {
         }
     }
 
+    //post action
     post {
-        always {
+        //it will be executed everytime
+        always { 
+            //path to the junit.xml file where the results will be recorded
             junit 'test-results/junit.xml'
         }
     }
